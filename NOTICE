@@ -1,0 +1,16 @@
+quarkus-brotli-audit
+====================
+
+Ce projet a été généré avec l'assistance d'une IA : Claude Code (Anthropic),
+modèle Claude Opus. Le code, les tests et la documentation ont été produits au
+cours d'une investigation interactive de la chaîne de (dé)compression
+Quarkus / Vert.x / Netty autour de CVE-2026-111497.
+
+Les règles de résolution de configuration encodées par l'outil ont été
+vérifiées sur le code source de Quarkus 3.33.x et 3.40.x au moment de la
+rédaction.
+
+Avertissement : cet outil fait de l'analyse statique. Il n'établit pas
+l'inexploitabilité de la vulnérabilité. Relisez le code et validez les
+résultats dans votre contexte avant tout usage en production. Vous restez
+responsable de l'usage qui en est fait.

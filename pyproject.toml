@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quarkus-brotli-audit"
+version = "0.1.0"
+description = "Audit statique de l'exposition d'une application Quarkus au décodeur Brotli vulnérable (CVE-2026-111497)."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+keywords = ["quarkus", "brotli", "cve-2026-111497", "security", "audit", "sast"]
+authors = [{ name = "hayupisama" }]
+# Aucune dépendance obligatoire. PyYAML est utilisé s'il est présent.
+dependencies = []
+
+[project.optional-dependencies]
+yaml = ["PyYAML>=6.0"]
+
+[project.urls]
+Homepage = "https://github.com/hayupisama/quarkus-brotli-audit"
+Issues = "https://github.com/hayupisama/quarkus-brotli-audit/issues"
+
+[project.scripts]
+quarkus-brotli-audit = "brotli_audit:main"
+
+[tool.setuptools]
+py-modules = ["brotli_audit"]

@@ -1,0 +1,34 @@
+# Exemple d'intégration GitLab CI pour quarkus-brotli-audit.
+# À adapter : ce fichier sert à la fois aux tests du projet et comme modèle de job d'audit
+# à copier dans le pipeline de VOS applications Quarkus.
+
+stages:
+  - test
+  - audit
+
+# 1) Tests du projet lui-même
+unit-tests:
+  stage: test
+  image: python:3.12-slim
+  script:
+    - python tests/test_brotli_audit.py
+
+# 2) Modèle de job d'audit à exécuter dans une app Quarkus.
+#    Copiez ce job dans le .gitlab-ci.yml de l'application cible (en récupérant brotli_audit.py,
+#    via submodule, package, ou copie), puis pointez-le sur la racine de l'app.
+brotli-audit:
+  stage: audit
+  image: python:3.12-slim
+  script:
+    # --prod-config-available uniquement si la config de prod est reflétée dans le dépôt et vérifiée.
+    - python brotli_audit.py . --prod-config-available
+  artifacts:
+    when: always
+    paths:
+      - target/brotli-security-audit.md
+      - target/brotli-security-audit.json
+  # FAIL (code 2) fait échouer le job. INCONCLUSIVE (code 3) est toléré ici ;
+  # retirez cette tolérance pour rendre INCONCLUSIVE bloquant selon votre politique.
+  allow_failure:
+    exit_codes:
+      - 3
